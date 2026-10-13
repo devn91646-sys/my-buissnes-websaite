@@ -1,0 +1,347 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dev Nayak | Digital Creator</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#080914;--purple:#9b7bff;--cyan:#67e8f9;--muted:#a4a6bc}
+html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:var(--bg);color:#fff;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+button,input,textarea{font:inherit}
+.container{width:min(1100px,90%);margin:auto}
+#particles{position:fixed;inset:0;z-index:-2;pointer-events:none}
+.glow{position:fixed;width:400px;height:400px;border-radius:50%;filter:blur(120px);opacity:.16;z-index:-1;pointer-events:none;background:#8247ff;top:-150px;left:-120px}
+.glow2{position:fixed;width:400px;height:400px;border-radius:50%;filter:blur(120px);opacity:.13;z-index:-1;pointer-events:none;background:#00c8df;bottom:-150px;right:-120px}
+
+nav{position:fixed;top:0;left:0;width:100%;z-index:10;background:#080914d9;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff12}
+.nav{height:72px;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:23px;font-weight:900;letter-spacing:-1px}
+.logo span{color:var(--purple)}
+.links{display:flex;align-items:center;gap:27px}
+.links a{font-size:13px;color:#c5c5d8;transition:.3s}
+.links a:hover{color:var(--cyan)}
+.menu{display:none;background:none;border:0;color:white;font-size:26px;cursor:pointer}
+
+.hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 70px}
+.hero-grid{display:grid;grid-template-columns:1.15fr .85fr;align-items:center;gap:40px}
+.tag{display:inline-block;padding:10px 14px;border:1px solid #9b7bff55;background:#9b7bff12;border-radius:30px;font-size:11px;color:#d0c1ff;margin-bottom:25px}
+h1{font-size:clamp(46px,7vw,80px);line-height:1.05;letter-spacing:-4px}
+.gradient{background:linear-gradient(100deg,#c4adff,#67e8f9);background-clip:text;-webkit-background-clip:text;color:transparent}
+.desc{color:var(--muted);font-size:14px;line-height:1.9;max-width:480px;margin:23px 0 28px}
+.buttons{display:flex;flex-wrap:wrap;gap:13px}
+.btn{display:inline-block;padding:14px 20px;border-radius:11px;font-size:13px;font-weight:700;transition:.3s;cursor:pointer}
+.btn:hover{transform:translateY(-4px)}
+.primary{background:linear-gradient(120deg,#8056ff,#aa8aff);box-shadow:0 8px 30px #8056ff30}
+.outline{border:1px solid #ffffff25;background:#ffffff06}
+
+.skills-art{position:relative;perspective:1000px;min-height:390px;display:grid;place-items:center}
+.skill-orbit{position:absolute;width:310px;height:310px;border:1px solid #9b7bff45;border-radius:50%;transform:rotateX(65deg);animation:spin 15s linear infinite}
+.skill-orbit:before{content:"";position:absolute;top:10px;left:60px;width:9px;height:9px;background:var(--cyan);box-shadow:0 0 20px var(--cyan);border-radius:50%}
+@keyframes spin{to{transform:rotateX(65deg) rotateZ(360deg)}}
+.skill-sphere{width:240px;height:240px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-direction:column;text-align:center;gap:12px;background:radial-gradient(circle at 30% 25%,#423274,#19152f 55%,#0a0b18);border:1px solid #b5a0ff65;box-shadow:inset -20px -20px 60px #0007,0 0 60px #895eff30;animation:float 4s ease-in-out infinite;transform-style:preserve-3d}
+.skill-sphere .symbol{font-size:46px;color:#c7b6ff;text-shadow:0 0 25px #9b7bff}
+.skill-sphere h2{font-size:24px}
+.skill-sphere p{font-size:11px;color:var(--muted)}
+@keyframes float{50%{transform:translateY(-12px) rotateY(5deg)}}
+.float{position:absolute;padding:12px 15px;background:#17172beF;border:1px solid #ffffff20;border-radius:12px;font-size:12px;box-shadow:0 10px 30px #0005;animation:float 4s ease-in-out infinite}
+.float.one{top:35px;right:0}
+.float.two{bottom:35px;left:0;animation-delay:-2s}
+
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:35px;padding-top:23px;border-top:1px solid #ffffff17}
+.stats strong{display:block;font-size:23px}
+.stats span{font-size:10px;color:var(--muted)}
+
+section{padding:85px 0;scroll-margin-top:70px}
+.heading{text-align:center;margin-bottom:43px}
+.kicker{font-size:10px;color:var(--purple);letter-spacing:4px;font-weight:800;text-transform:uppercase}
+.heading h2,.about h2{font-size:clamp(30px,4vw,45px);letter-spacing:-2px;margin:13px 0}
+.heading p{max-width:540px;margin:auto;color:var(--muted);font-size:13px;line-height:1.9}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:#ffffff06;border:1px solid #ffffff12;border-radius:17px;padding:25px;transition:.35s;transform-style:preserve-3d}
+.card:hover{transform:translateY(-7px) rotateX(2deg);border-color:#9b7bff75;box-shadow:0 20px 45px #0003}
+.icon{font-size:27px;margin-bottom:19px}
+.card h3{font-size:17px;margin-bottom:12px}
+.card p{font-size:12px;line-height:1.9;color:var(--muted)}
+.number{display:block;margin-top:20px;font-size:10px;letter-spacing:3px;color:#8c8da5}
+
+.about{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:40px}
+.about-box{border:1px solid #ffffff17;border-radius:20px;padding:30px;background:radial-gradient(circle at top left,#392363,#111222 65%);min-height:300px;display:flex;flex-direction:column;justify-content:center}
+.about-box .big{font-size:64px;font-weight:900;letter-spacing:-5px;color:#c2afff}
+.about-box h3{font-size:25px;margin:8px 0}
+.about-box p,.about>div:last-child p{font-size:13px;line-height:1.9;color:var(--muted);margin-top:12px}
+.pills{display:flex;flex-wrap:wrap;gap:9px;margin-top:22px}
+.pills span{padding:9px 12px;background:#ffffff08;border:1px solid #ffffff18;border-radius:8px;font-size:11px;color:#ddd5ff}
+
+.project-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.project{padding:25px;border:1px solid #ffffff15;background:linear-gradient(135deg,#17142c,#0d1020);border-radius:18px;transition:.3s}
+.project:hover{transform:translateY(-5px);border-color:#9b7bff70}
+.project .project-icon{font-size:34px;margin-bottom:22px}
+.project small{font-size:10px;color:var(--cyan);letter-spacing:2px}
+.project h3{font-size:20px;margin:12px 0}
+.project p{font-size:12px;line-height:1.8;color:var(--muted)}
+
+.cta{text-align:center;border:1px solid #9b7bff40;border-radius:22px;padding:55px 20px;background:radial-gradient(ellipse at top,#9b7bff20,transparent 70%)}
+.cta h2{font-size:clamp(30px,5vw,46px);margin:15px 0}
+.cta p{font-size:13px;line-height:1.9;color:var(--muted);margin-bottom:23px}
+
+.contact-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:30px}
+.contact-info p{font-size:13px;line-height:1.9;color:var(--muted);margin:15px 0}
+.contact-form{padding:25px;background:#ffffff06;border:1px solid #ffffff15;border-radius:18px}
+.contact-form label{display:block;font-size:12px;margin-bottom:8px}
+.contact-form input,.contact-form textarea{width:100%;padding:13px;margin-bottom:18px;background:#ffffff07;border:1px solid #ffffff19;border-radius:9px;color:white;outline:none}
+.contact-form textarea{min-height:110px;resize:vertical}
+.contact-form input:focus,.contact-form textarea:focus{border-color:var(--purple)}
+.contact-form button{width:100%;border:0;color:white}
+
+footer{padding:25px 0;border-top:1px solid #ffffff15;color:var(--muted);font-size:11px}
+.footer{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.reveal{opacity:0;transform:translateY(22px);transition:.8s}
+.reveal.show{opacity:1;transform:translateY(0)}
+
+@media(max-width:800px){
+.hero-grid,.about,.contact-grid{grid-template-columns:1fr}
+.hero-copy{text-align:center}
+.desc{margin-left:auto;margin-right:auto}
+.buttons{justify-content:center}
+.skills-art{min-height:360px}
+.grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:560px){
+.menu{display:block}
+.links{display:none;position:absolute;top:72px;left:0;width:100%;padding:25px;background:#0c0d1c;flex-direction:column;align-items:flex-start}
+.links.open{display:flex}
+h1{letter-spacing:-3px}
+.grid,.project-grid{grid-template-columns:1fr}
+.stats strong{font-size:19px}
+.float.one{right:0}
+.float.two{left:0}
+section{padding:65px 0}
+}
+@media(prefers-reduced-motion:reduce){
+*,*::before,*::after{animation:none!important;scroll-behavior:auto!important;transition:none!important}
+.reveal{opacity:1;transform:none}
+}
+</style>
+</head>
+
+<body>
+<canvas id="particles"></canvas>
+<div class="glow"></div><div class="glow2"></div>
+
+<nav>
+<div class="container nav">
+<a class="logo" href="#home">DEV<span>.</span>NAYAK</a>
+<button class="menu" id="menu" aria-label="Open menu">☰</button>
+<div class="links" id="links">
+<a href="#home">Home</a>
+<a href="#skills">My Skills</a>
+<a href="#about">About</a>
+<a href="#projects">Projects</a>
+<a href="#contact">Contact ↗</a>
+</div>
+</div>
+</nav>
+
+<main>
+<section class="hero" id="home">
+<div class="container hero-grid">
+<div class="hero-copy">
+<div class="tag">✦ CREATIVE MIND · DIGITAL FUTURE</div>
+<h1>Hello, I'm<br><span class="gradient">Dev Nayak.</span><br>Think Beyond.</h1>
+<p class="desc">Welcome to my digital world. I love exploring technology, creative ideas, modern websites and the future of digital experiences.</p>
+<div class="buttons">
+<a class="btn primary" href="#skills">Explore My Skills ↗</a>
+<a class="btn outline" href="#contact">Let's Connect</a>
+</div>
+<div class="stats">
+<div><strong>3D</strong><span>Modern Design</span></div>
+<div><strong>AI</strong><span>Future Ideas</span></div>
+<div><strong>∞</strong><span>Keep Creating</span></div>
+</div>
+</div>
+
+<div class="skills-art">
+<div class="skill-orbit"></div>
+<div class="skill-sphere">
+<div class="symbol">✧</div>
+<h2>DEV NAYAK</h2>
+<p>CREATIVITY • TECHNOLOGY</p>
+</div>
+<div class="float one">✦ Creative Thinker</div>
+<div class="float two">◈ Digital Explorer</div>
+</div>
+</div>
+</section>
+
+<section id="skills">
+<div class="container">
+<div class="heading reveal">
+<div class="kicker">My Skills</div>
+<h2>What I <span class="gradient">Can Do.</span></h2>
+<p>My areas of interest and the digital skills I want to develop and showcase.</p>
+</div>
+<div class="grid">
+<div class="card reveal"><div class="icon">💻</div><h3>Web Development</h3><p>Creating websites with HTML, CSS and JavaScript, focusing on design and usability.</p><span class="number">01 / WEB</span></div>
+<div class="card reveal"><div class="icon">🤖</div><h3>Artificial Intelligence</h3><p>Exploring AI tools and creative ways to use modern technology.</p><span class="number">02 / AI</span></div>
+<div class="card reveal"><div class="icon">🎨</div><h3>Creative Design</h3><p>Building stylish digital layouts with gradients, colors and smooth animations.</p><span class="number">03 / DESIGN</span></div>
+<div class="card reveal"><div class="icon">🌀</div><h3>3D Experiences</h3><p>Experimenting with depth, interactive elements and immersive visual effects.</p><span class="number">04 / 3D</span></div>
+<div class="card reveal"><div class="icon">📱</div><h3>Responsive Design</h3><p>Making website layouts adapt to mobile phones, tablets and desktops.</p><span class="number">05 / RESPONSIVE</span></div>
+<div class="card reveal"><div class="icon">🚀</div><h3>Learning & Innovation</h3><p>Discovering new ideas, learning useful tools and improving projects step by step.</p><span class="number">06 / FUTURE</span></div>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="container about">
+<div class="about-box reveal">
+<div class="big">DN.</div>
+<h3>Dev Nayak</h3>
+<p>Creativity meets technology.<br>One idea at a time.</p>
+</div>
+<div class="reveal">
+<div class="kicker">About Me</div>
+<h2>My Digital <span class="gradient">Journey.</span></h2>
+<p>Hi, I'm Dev Nayak. This is my personal website where I can introduce myself, share my interests and showcase my digital work.</p>
+<p>I'm interested in creative technology, web design and new digital ideas. This website can grow along with my skills and projects.</p>
+<div class="pills">
+<span>HTML</span><span>CSS</span><span>JavaScript</span><span>AI Tools</span><span>Creative Ideas</span>
+</div>
+</div>
+</div>
+</section>
+
+<section id="projects">
+<div class="container">
+<div class="heading reveal">
+<div class="kicker">My Work</div>
+<h2>Creative <span class="gradient">Projects.</span></h2>
+<p>Use this section to present your real projects, experiments and future goals.</p>
+</div>
+<div class="project-grid">
+<div class="project reveal"><div class="project-icon">🌐</div><small>PROJECT 01</small><h3>My Personal Website</h3><p>A personal digital space for my profile, skills and ideas.</p></div>
+<div class="project reveal"><div class="project-icon">🤖</div><small>PROJECT 02</small><h3>AI Exploration</h3><p>Learning how AI tools can help with creativity and digital projects.</p></div>
+<div class="project reveal"><div class="project-icon">✨</div><small>PROJECT 03</small><h3>Modern Web Design</h3><p>Experimenting with smooth motion, layouts and interactive web elements.</p></div>
+<div class="project reveal"><div class="project-icon">🚀</div><small>PROJECT 04</small><h3>Future Goals</h3><p>A place to add new projects as I learn and build more experiences.</p></div>
+</div>
+</div>
+</section>
+
+<section>
+<div class="container">
+<div class="cta reveal">
+<div class="kicker">Have an Idea?</div>
+<h2>Let's Create <span class="gradient">Something Great.</span></h2>
+<p>Let's connect and talk about creative ideas and digital projects.</p>
+<a href="#contact" class="btn primary">Contact Me ↗</a>
+</div>
+</div>
+</section>
+
+<section id="contact">
+<div class="container">
+<div class="heading reveal">
+<div class="kicker">Get In Touch</div>
+<h2>Let's <span class="gradient">Connect.</span></h2>
+<p>Send a message to start a conversation.</p>
+</div>
+<div class="contact-grid">
+<div class="contact-info reveal">
+<h2>Say Hello 👋</h2>
+<p>Interested in my work or have a project idea? Use the form to prepare an email message.</p>
+<p>✦ Name: Dev Nayak</p>
+<p>✦ Interests: Technology, Design, AI</p>
+</div>
+<form class="contact-form reveal" id="contactForm">
+<label for="name">Your Name</label>
+<input id="name" required placeholder="Enter your name">
+<label for="email">Your Email</label>
+<input id="email" type="email" required placeholder="you@example.com">
+<label for="message">Your Message</label>
+<textarea id="message" required placeholder="Write your message..."></textarea>
+<button class="btn primary" type="submit">Prepare Email ↗</button>
+</form>
+</div>
+</div>
+</section>
+</main>
+
+<footer><div class="container footer"><strong>DEV<span style="color:#9b7bff">.</span>NAYAK</strong><span>© <span id="year"></span> Dev Nayak</span><a href="#home">Back to Top ↑</a></div></footer>
+
+<script>
+// Mobile navigation
+const menu=document.getElementById('menu');
+const links=document.getElementById('links');
+menu.onclick=()=>links.classList.toggle('open');
+links.querySelectorAll('a').forEach(a=>a.onclick=()=>links.classList.remove('open'));
+
+// Smooth reveal
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add('show');
+observer.unobserve(entry.target);
+}
+});
+},{threshold:.12});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// Animated background particles
+const canvas=document.getElementById('particles');
+const ctx=canvas.getContext('2d');
+let particles=[],w=0,h=0;
+function resize(){
+w=canvas.width=innerWidth;
+h=canvas.height=innerHeight;
+particles=Array.from({length:Math.min(55,Math.floor(w/18))},()=>({
+x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.5+.4,s:Math.random()*.3+.08
+}));
+}
+function draw(){
+ctx.clearRect(0,0,w,h);
+particles.forEach((p,i)=>{
+p.y-=p.s;
+if(p.y<0){p.y=h;p.x=Math.random()*w;}
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fillStyle='rgba(180,160,255,.7)';
+ctx.fill();
+for(let j=i+1;j<particles.length;j++){
+const q=particles[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.hypot(dx,dy);
+if(d<90){
+ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);
+ctx.strokeStyle=`rgba(155,123,255,${.12*(1-d/90)})`;ctx.stroke();
+}
+}
+});
+requestAnimationFrame(draw);
+}
+resize();draw();
+window.addEventListener('resize',resize);
+
+// Contact email: change to your real email address
+const YOUR_EMAIL='your-email@example.com';
+document.getElementById('contactForm').addEventListener('submit',e=>{
+e.preventDefault();
+if(YOUR_EMAIL==='your-email@example.com'){
+alert('Please replace YOUR_EMAIL in the JavaScript with your real email address.');
+return;
+}
+const name=document.getElementById('name').value.trim();
+const email=document.getElementById('email').value.trim();
+const message=document.getElementById('message').value.trim();
+const subject=encodeURIComponent('Website message from '+name);
+const body=encodeURIComponent('Name: '+name+'\nEmail: '+email+'\n\n'+message);
+location.href=`mailto:${YOUR_EMAIL}?subject=${subject}&body=${body}`;
+});
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+</body>
+</html>
+```
